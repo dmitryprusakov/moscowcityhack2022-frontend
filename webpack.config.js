@@ -14,6 +14,13 @@ module.exports = function (env, { mode }) {
       client: {
         overlay: false,
       },
+      // proxy: {
+      //   '/api/**': {
+      //     target: 'http://84.252.137.43:8000',
+      //     changeOrigin: true,
+      //     secure: false,
+      //   },
+      // }
     },
     output: {
       publicPath: '/',

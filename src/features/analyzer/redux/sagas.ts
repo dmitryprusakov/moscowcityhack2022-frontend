@@ -16,6 +16,10 @@ import {
 } from './slice';
 import { testData, testText } from './fake-data';
 
+const axiosInstance = axios.create({
+  baseURL: 'http://84.252.137.43:8000',
+});
+
 function* analyzerSaga(): SagaIterator {
   yield all([
     takeLatest(sendDataToAnalyzis, function* sendDataToAnalyzisSaga({ payload }) {
@@ -25,13 +29,15 @@ function* analyzerSaga(): SagaIterator {
         yield put(setInitialData(pending()));
         yield delay(3000);
 
-        // const { data }: AxiosResponse<AnalyzeInitialData> = yield axios.post('/api/docs', payload);
-        const data = { ar_id: '1', title: 'Wow!', text: testText };
+        const { data }: AxiosResponse<AnalyzeInitialData> = yield axiosInstance.post('/api/docs/', payload);
+
+        console.log('data', data);
+
         yield put(setInitialData(success(data)));
 
         const { ar_id: arId } = data;
 
-        yield put(checkAnalysisData(arId));
+        // yield put(checkAnalysisData(arId));
       } catch (error) {
         const { response, config } = error as AxiosError;
 
@@ -42,7 +48,7 @@ function* analyzerSaga(): SagaIterator {
       try {
         yield put(setAnalysisData(pending()));
 
-        // const { data }: AxiosResponse<AnalyzisData> = yield axios.get(`/api/analysis-results?ar_id=${payload}`);
+        // const { data }: AxiosResponse<AnalyzisData> = yield axiosInstance.get(`/api/analysis-results?ar_id=${payload}`);
         if (testData.blocksCountForLoading !== 0) {
           console.log('wait', testData);
 
