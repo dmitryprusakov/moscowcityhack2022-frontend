@@ -22,10 +22,37 @@ export type AnalyzisData = {
 };
 
 export type Block1 = {
-  isPrimarySource: boolean;
-  primarySourceURL: string;
+  url: string;
+  createdAt: string;
+  text: string;
+  sourceScore: string;
+  timesPublished: string | number;
+  percentageBlackList: string | number;
+  avgSourcesScore: string | number;
+  reliableSourcesFlag: boolean;
 };
 
 export type Block2 = {
-  data: any;
+  data: {
+    date: string;
+    isValid: boolean;
+  }[];
+};
+
+export type Block3 = {
+  percentageПлагиат: string | number;
+  isAnySentimentDelta: boolean;
+  facts: string[];
+};
+
+export type Block4 = {
+  grammaticErrorsCount: number;
+  spamIndex: number;
+  waterIndex: number;
+  sentimentIndex: number;
+  speechIndex: number;
+  intuitionIndex: number;
+  clickbaitIndex: number;
+  rationalityIndex: number;
+  fakeIndex: number;
 };

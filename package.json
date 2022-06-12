@@ -19,6 +19,7 @@
   "scripts": {
     "start": "webpack-cli serve",
     "build": "yarn clean && webpack --mode=production",
+    "build-prod": "webpack --mode=production",
     "analyze": "yarn webpack --analyze",
     "clean": "rimraf dist",
     "eslint": "eslint --fix . --ext .ts,.tsx,.js src",

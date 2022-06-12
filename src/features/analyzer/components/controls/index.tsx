@@ -14,7 +14,7 @@ const { TabPane } = Tabs;
 const Controls: FC = () => {
   const dispatch = useAppDispatch();
 
-  const [activeTabKey, setActiveTabKey] = useState<string>('analyze-form-url');
+  const [activeTabKey, setActiveTabKey] = useState<string>('analyze-form-text');
 
   const [form] = Form.useForm();
 
@@ -66,21 +66,6 @@ const Controls: FC = () => {
       <TabPane
         tab={
           <span className={css.tabTitle}>
-            <LinkOutlined />
-            URL
-          </span>
-        }
-        key="analyze-form-url"
-      >
-        <Form id="analyze-form-url" className={css.form} onFinish={onFinish} form={form}>
-          <Form.Item name="url" rules={[{ required: true, message: 'Введите URL страницы с новостью!' }]}>
-            <Input size="large" placeholder="URL страницы с новостью" />
-          </Form.Item>
-        </Form>
-      </TabPane>
-      <TabPane
-        tab={
-          <span className={css.tabTitle}>
             <ExceptionOutlined />
             Текст
           </span>
@@ -93,6 +78,21 @@ const Controls: FC = () => {
           </Form.Item>
           <Form.Item name="text" rules={[{ required: true, message: 'Ввудите текст новости!' }]}>
             <Input.TextArea size="large" showCount placeholder="Текст новости" />
+          </Form.Item>
+        </Form>
+      </TabPane>
+      <TabPane
+        tab={
+          <span className={css.tabTitle}>
+            <LinkOutlined />
+            URL
+          </span>
+        }
+        key="analyze-form-url"
+      >
+        <Form id="analyze-form-url" className={css.form} onFinish={onFinish} form={form}>
+          <Form.Item name="url" rules={[{ required: true, message: 'Введите URL страницы с новостью!' }]}>
+            <Input size="large" placeholder="URL страницы с новостью" />
           </Form.Item>
         </Form>
       </TabPane>

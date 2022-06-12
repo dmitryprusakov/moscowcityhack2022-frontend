@@ -24,8 +24,8 @@ module.exports = function (env, { mode }) {
     },
     output: {
       publicPath: '/',
-      filename: path.join('js', `bundle${mode === "production" ? ".[fullhash]" : ""}.js`),
-      chunkFilename: path.join('js', 'chunks', '[name].[contenthash].js'),
+      filename: path.join(`bundle.js`),
+      // chunkFilename: path.join('js', 'chunks', '[name].[contenthash].js'),
     },
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -109,8 +109,8 @@ module.exports = function (env, { mode }) {
       }),
     ].concat(mode !== 'production' ? [] : [
       new MiniCssExtractPlugin({
-        filename: path.join("css", `bundle${mode === "production" ? ".[fullhash]" : ""}.css`),
-        chunkFilename: path.join("css", "chunks", "[name].[contenthash].css"),
+        filename: path.join(`bundle.css`),
+        // chunkFilename: path.join("css", "chunks", "[name].[contenthash].css"),
       }),
     ]),
   };
