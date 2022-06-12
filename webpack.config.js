@@ -102,7 +102,7 @@ module.exports = function (env, { mode }) {
       new HtmlWebpackPlugin({
         publicPath: '/',
         template: './public/index.html',
-        favicon: './public/icons/favicon.png',
+        favicon: './public/favicon.png',
         minify: mode === 'production' && {
           removeComments: true,
           collapseWhitespace: true,
