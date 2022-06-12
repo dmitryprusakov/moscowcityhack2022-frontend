@@ -52,6 +52,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-import": "^1.13.5",
     "bundle-loader": "0.5.6",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-typescript": "^17.0.0",

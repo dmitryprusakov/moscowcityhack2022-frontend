@@ -90,10 +90,18 @@ module.exports = function (env, { mode }) {
     },
     plugins: [
       new ESLintPlugin(),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: "icons",
+            to: "icons",
+          }
+        ],
+      }),
       new HtmlWebpackPlugin({
         publicPath: '/',
         template: './public/index.html',
-        favicon: './public/favicon.png',
+        favicon: './public/icons/favicon.png',
         minify: mode === 'production' && {
           removeComments: true,
           collapseWhitespace: true,
