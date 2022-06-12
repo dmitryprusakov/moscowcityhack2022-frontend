@@ -1,0 +1,139 @@
+{
+  "extends": [
+    "airbnb-typescript",
+    "prettier",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "plugins": ["deprecate", "react-hooks", "jsx-a11y", "@typescript-eslint", "import", "sort-imports-es6-autofix", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "excludedFiles": "*.config.js"
+    }
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "paths": ["src"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "globals": {
+    "process": true
+  },
+  "rules": {
+    "react/require-default-props": "off",
+    "react/prop-types": "off",
+    "react/self-closing-comp": "error",
+    "react/no-unused-prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-useless-path-segments": "warn",
+    "import/namespace": "off",
+    "import/prefer-default-export": "off",
+    "import/no-deprecated": "warn",
+    "import/named": "off",
+    "import/no-unresolved": "error",
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": [
+          "none",
+          "all",
+          "multiple",
+          "single"
+        ]
+      }
+    ],
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/indent": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "no-empty-function": "off",
+    "no-unused-expressions": "off",
+    "no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true,
+        "allowTaggedTemplates": true
+      }
+    ],
+    "linebreak-style": 0,
+    "require-jsdoc": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    // "indent": [
+    //   "error",
+    //   2,
+    //   {
+    //     "CallExpression": {
+    //       "arguments": 1
+    //     },
+    //     "SwitchCase": 1
+    //   }
+    // ],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "tabWidth": 2,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignorePattern": "(module|require|import)"
+      }
+    ]
+  }
+}

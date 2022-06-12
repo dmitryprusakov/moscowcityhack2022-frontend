@@ -1,0 +1,8 @@
+dist
+public
+node_modules
+README.md
+i18next-parser.config.js
+src/index.ts
+src/api/impl
+/tests/__coverage__/
