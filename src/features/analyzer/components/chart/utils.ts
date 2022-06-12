@@ -112,8 +112,8 @@ export const createChart = (id: string) => {
     })
   );
 
-  const positiveColor = am5.Color.lighten(root.interfaceColors.get('positive')!, 0.5);
-  const negativeColor = am5.Color.lighten(root.interfaceColors.get('negative')!, 0.5);
+  const positiveColor = am5.color('#0cce6a');
+  const negativeColor = am5.color('#ffa400');
 
   makeSeries({
     chart,
