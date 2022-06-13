@@ -6,28 +6,28 @@ import { AnalyzisData } from 'types';
 
 import moment from 'moment';
 
-const fakeData = [
-  {
-    week: '09.05 - 15.05',
-    validMediaCount: 1,
-    invalidMediaCount: 3,
-  },
-  {
-    week: '16.05 - 22.05',
-    validMediaCount: 3,
-    invalidMediaCount: 5,
-  },
-  {
-    week: '23.05 - 29.05',
-    validMediaCount: 2,
-    invalidMediaCount: 4,
-  },
-  {
-    week: '30.05 - 05.06',
-    // validMediaCount: 0,
-    invalidMediaCount: 3,
-  },
-];
+// const fakeData = [
+//   {
+//     week: '09.05 - 15.05',
+//     validMediaCount: 1,
+//     invalidMediaCount: 3,
+//   },
+//   {
+//     week: '16.05 - 22.05',
+//     validMediaCount: 3,
+//     invalidMediaCount: 5,
+//   },
+//   {
+//     week: '23.05 - 29.05',
+//     validMediaCount: 2,
+//     invalidMediaCount: 4,
+//   },
+//   {
+//     week: '30.05 - 05.06',
+//     // validMediaCount: 0,
+//     invalidMediaCount: 3,
+//   },
+// ];
 
 interface MakeSeries {
   chart: am5xy.XYChart;
