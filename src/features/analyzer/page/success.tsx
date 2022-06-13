@@ -1,4 +1,4 @@
-import { Badge, Descriptions } from 'antd';
+import { Badge, Descriptions, Divider } from 'antd';
 import { FileTextTwoTone } from '@ant-design/icons';
 import React, { FC, memo } from 'react';
 
@@ -31,6 +31,7 @@ const AnalyzisSuccess: FC<AnalyzisSuccessProps> = ({ data }: AnalyzisSuccessProp
         </Descriptions.Item>
       </Descriptions>
       <span className={css.textDescriptionContent}>{data?.text || 'н/д'}</span>
+      <Divider />
     </>
   );
 };

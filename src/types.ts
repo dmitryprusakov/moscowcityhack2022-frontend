@@ -16,43 +16,32 @@ export type AnalyzeInitialData = {
 };
 
 export type AnalyzisData = {
+  id: number;
+  primary_source_url?: string;
+  created_at?: string;
   text?: string;
-  title?: string;
-  blocksCountForLoading: number;
-};
-
-export type Block1 = {
-  url: string;
-  createdAt: string;
-  text: string;
-  sourceScore: string;
-  timesPublished: string | number;
-  percentageBlackList: string | number;
-  avgSourcesScore: string | number;
-  reliableSourcesFlag: boolean;
-};
-
-export type Block2 = {
-  data: {
+  source_score?: number;
+  times_published?: number;
+  percentage_blacklist?: number;
+  source_text?: string;
+  avg_sources_score?: number;
+  reliable_sources_flag?: boolean;
+  diagram_data?: {
     date: string;
-    isValid: boolean;
+    is_valid: boolean;
   }[];
-};
-
-export type Block3 = {
-  percentageПлагиат: string | number;
-  isAnySentimentDelta: boolean;
-  facts: string[];
-};
-
-export type Block4 = {
-  grammaticErrorsCount: number;
-  spamIndex: number;
-  waterIndex: number;
-  sentimentIndex: number;
-  speechIndex: number;
-  intuitionIndex: number;
-  clickbaitIndex: number;
-  rationalityIndex: number;
-  fakeIndex: number;
+  plagiary_percentage?: string;
+  is_any_sentiment_delta?: true;
+  facts?: string;
+  grammatic_errors_count?: number;
+  spam_index?: number;
+  water_index?: number;
+  sentiment_index?: number;
+  speech_index?: number;
+  intuition_index?: number;
+  clickbait_index?: number;
+  rationality_index?: number;
+  fake_index?: number;
+  date_added: string;
+  date_updated: string;
 };

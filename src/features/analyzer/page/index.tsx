@@ -2,14 +2,14 @@ import { Descriptions, Divider } from 'antd';
 import { ReconciliationTwoTone } from '@ant-design/icons';
 import React, { FC } from 'react';
 
-import { AnalyzeInitialData, Block1, Block2 } from 'types';
+import { AnalyzeInitialData, AnalyzisData } from 'types';
 import { fold } from 'libs/remote';
 import { useAppSelector } from 'store';
 
-import { selectAnalyzisDataBlock1, selectAnalyzisDataBlock2, selectInitialData } from '../redux/selectors';
+import { selectAnalyzisData, selectInitialData } from '../redux/selectors';
 import css from './index.module.css';
 
-import { Chart, Controls } from '../components';
+import { Block1, Block2, Block3, Block4, Chart, Controls } from '../components';
 import AnalyzisFailure from './failure';
 import AnalyzisLoading from './loading';
 import AnalyzisSuccess from './success';
@@ -21,17 +21,15 @@ const analyzerInitialDataFolder = fold<AnalyzeInitialData>(
   (error) => <AnalyzisFailure error={error} />
 );
 
-const analyzerDataBlock1Folder = fold<Block1>(
-  () => (
+const analyzerDataFolder = fold<AnalyzisData>(
+  (data) => (
     <>
       {/* <Divider /> */}
-      <Descriptions
-        title={
-          <>
-            <ReconciliationTwoTone /> Результаты анализа
-          </>
-        }
-      />
+      <Block1 data={data} />
+      <Block2 data={data} />
+      <Chart data={data} />
+      <Block3 data={data} />
+      <Block4 data={data} />
     </>
   ),
   () => <></>,
@@ -39,29 +37,20 @@ const analyzerDataBlock1Folder = fold<Block1>(
   () => <>block1 error</>
 );
 
-const analyzerDataBlock2Folder = fold<Block2>(
-  () => (
-    <>
-      {/* <Divider /> */}
-      <Chart />
-    </>
-  ),
-  () => <></>,
-  () => <>block2 loading</>,
-  () => <>block2 error</>
-);
-
 const AnalyzerIndex: FC = () => {
   const analisisInitialData = useAppSelector(selectInitialData);
-  const analisisDataBlock1 = useAppSelector(selectAnalyzisDataBlock1);
-  const analisisDataBlock2 = useAppSelector(selectAnalyzisDataBlock2);
+
+  const analisisData = useAppSelector(selectAnalyzisData);
+
+  // const analisisDataBlock1 = useAppSelector(selectAnalyzisDataBlock1);
+  // const analisisDataBlock2 = useAppSelector(selectAnalyzisDataBlock2);
 
   return (
     <div className={css.layout}>
       <Controls />
       {analyzerInitialDataFolder(analisisInitialData)}
-      {analyzerDataBlock2Folder(analisisDataBlock2)}
-      {analyzerDataBlock1Folder(analisisDataBlock1)}
+      {analyzerDataFolder(analisisData)}
+      {/* {analyzerDataBlock1Folder(analisisDataBlock1)} */}
     </div>
   );
 };

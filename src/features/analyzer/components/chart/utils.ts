@@ -1,7 +1,10 @@
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
+import { AnalyzisData } from 'types';
 
-const data = [
+import moment from 'moment';
+
+const fakeData = [
   {
     week: '09.05 - 15.05',
     validMediaCount: 1,
@@ -32,9 +35,10 @@ interface MakeSeries {
   color: am5.Color | undefined;
   name: string;
   fieldName: string;
+  data: any[];
 }
 
-const makeSeries = ({ chart, xAxis, yAxis, legend, color, name, fieldName }: MakeSeries) => {
+const makeSeries = ({ chart, xAxis, yAxis, legend, color, name, fieldName, data }: MakeSeries) => {
   const series = chart.series.push(
     am5xy.ColumnSeries.new(chart.root, {
       name: name,
@@ -69,7 +73,43 @@ const makeSeries = ({ chart, xAxis, yAxis, legend, color, name, fieldName }: Mak
   legend.data.push(series);
 };
 
-export const createChart = (id: string) => {
+export const createChart = (id: string, data: AnalyzisData) => {
+  const chartData = data.diagram_data;
+  console.log('chartData', chartData);
+
+  const numberedData = chartData!.map((point) => ({
+    is_valid: point.is_valid,
+    date: new Date(point.date).getTime(),
+  }));
+
+  const sortedByDateData = numberedData.sort((a, b) => a.date - b.date);
+
+  const calculatedData = sortedByDateData
+    .reduce((acc, value) => {
+      const weekOfPoint = moment(value.date).isoWeeks();
+
+      if (value.is_valid) {
+        acc[weekOfPoint] = {
+          ...acc[weekOfPoint],
+          week: weekOfPoint,
+          validMediaCount: (acc[weekOfPoint]?.validMediaCount || 0) + 1,
+        };
+      }
+
+      if (!value.is_valid) {
+        acc[weekOfPoint] = {
+          ...acc[weekOfPoint],
+          week: weekOfPoint,
+          invalidMediaCount: (acc[weekOfPoint]?.invalidMediaCount || 0) + 1,
+        };
+      }
+
+      return acc;
+    }, [])
+    .filter(Boolean);
+
+  console.log('calculatedData', calculatedData);
+
   const root = am5.Root.new(id);
 
   const chart = root.container.children.push(
@@ -97,7 +137,7 @@ export const createChart = (id: string) => {
     })
   );
 
-  xAxis.data.setAll(data);
+  xAxis.data.setAll(calculatedData);
 
   const yAxis = chart.yAxes.push(
     am5xy.ValueAxis.new(root, {
@@ -123,6 +163,7 @@ export const createChart = (id: string) => {
     color: negativeColor,
     name: 'Количество недостоверных СМИ',
     fieldName: 'invalidMediaCount',
+    data: calculatedData,
   });
   makeSeries({
     chart,
@@ -132,5 +173,6 @@ export const createChart = (id: string) => {
     color: positiveColor,
     name: 'Количество достоверных СМИ',
     fieldName: 'validMediaCount',
+    data: calculatedData,
   });
 };

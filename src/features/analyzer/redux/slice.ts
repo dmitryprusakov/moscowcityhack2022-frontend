@@ -29,12 +29,12 @@ export const analyzerSlice = createSlice({
     setAnalysisData: (state, action: PayloadAction<RemoteData<AnalyzisData>>) => {
       state.analyzisData = action.payload;
     },
-    setAnalysisDataBlock1: (state, action: PayloadAction<RemoteData<Block1>>) => {
-      state.analyzisDataBlock1 = action.payload;
-    },
-    setAnalysisDataBlock2: (state, action: PayloadAction<RemoteData<Block2>>) => {
-      state.analyzisDataBlock2 = action.payload;
-    },
+    // setAnalysisDataBlock1: (state, action: PayloadAction<RemoteData<Block1>>) => {
+    //   state.analyzisDataBlock1 = action.payload;
+    // },
+    // setAnalysisDataBlock2: (state, action: PayloadAction<RemoteData<Block2>>) => {
+    //   state.analyzisDataBlock2 = action.payload;
+    // },
   },
 });
 
@@ -43,7 +43,7 @@ export const {
   setInitialData,
   checkAnalysisData,
   setAnalysisData,
-  setAnalysisDataBlock1,
-  setAnalysisDataBlock2,
+  // setAnalysisDataBlock1,
+  // setAnalysisDataBlock2,
 } = analyzerSlice.actions;
 export default analyzerSlice.reducer;
