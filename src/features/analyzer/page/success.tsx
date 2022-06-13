@@ -23,7 +23,7 @@ const AnalyzisSuccess: FC<AnalyzisSuccessProps> = ({ data }: AnalyzisSuccessProp
         column={1}
       >
         <Descriptions.Item label="Процесс анализа">
-          <Badge status="processing" text="Обработка" />
+          <Badge status="success" text="Завершен" />
         </Descriptions.Item>
         <Descriptions.Item label="Заголовок новости">{data?.title || 'н/д'}</Descriptions.Item>
         <Descriptions.Item label="Текст новости">
