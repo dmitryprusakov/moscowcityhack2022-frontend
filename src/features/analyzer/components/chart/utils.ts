@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import { AnalyzisData } from 'types';
@@ -85,7 +87,7 @@ export const createChart = (id: string, data: AnalyzisData) => {
   const sortedByDateData = numberedData.sort((a, b) => a.date - b.date);
 
   const calculatedData = sortedByDateData
-    .reduce((acc, value) => {
+    .reduce((acc: any[], value) => {
       const weekOfPoint = moment(value.date).isoWeeks();
 
       if (value.is_valid) {
