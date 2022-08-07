@@ -24,7 +24,7 @@ function* analyzerSaga(): SagaIterator {
         yield put(setInitialData(pending()));
         yield delay(1000);
 
-        const { data }: AxiosResponse<AnalyzeInitialData> = yield axiosInstance.post('/api/docs/', payload);
+        const { data }: AxiosResponse<AnalyzeInitialData> = yield axiosInstance.post('/api/v1/documents/', payload);
 
         console.log('data', data);
 
@@ -42,7 +42,7 @@ function* analyzerSaga(): SagaIterator {
       try {
         console.log(count);
 
-        const { data }: AxiosResponse<AnalyzisData> = yield axiosInstance.get(`/api/analysis-results/${payload}`);
+        const { data }: AxiosResponse<AnalyzisData> = yield axiosInstance.get(`/api/v1/analysis_results/${payload}`);
 
         console.log('checkAnalysisData', data);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
