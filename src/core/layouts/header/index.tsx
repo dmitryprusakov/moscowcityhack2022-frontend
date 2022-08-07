@@ -7,11 +7,11 @@ const Header: FC = () => {
   return (
     <div className={css.layout}>
       <Link to="/">
-        <h1>Ezee News Analyzer для MoscowCityHack2022</h1>
+        <h1>Ezee News Analyzer</h1>
       </Link>
-      <Link to="/about">
+      {/* <Link to="/about">
         <h2>Документация</h2>
-      </Link>
+      </Link> */}
     </div>
   );
 };
