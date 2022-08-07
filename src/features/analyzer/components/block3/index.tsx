@@ -23,9 +23,7 @@ const Block2: FC<Block2Props> = ({ data }: Block2Props) => {
         }
         column={1}
       >
-        <Descriptions.Item label="% уникальности относительно первоисточника">
-          {data?.plagiary_percentage}
-        </Descriptions.Item>
+        <Descriptions.Item label="% уникальности относительно первоисточника">{data?.plagiarism}</Descriptions.Item>
 
         <Descriptions.Item label="Степень эмоциональности отличается от оригинала">
           {data?.is_any_sentiment_delta}

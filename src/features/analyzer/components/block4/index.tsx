@@ -22,21 +22,17 @@ const Block4: FC<Block4Props> = ({ data }: Block4Props) => {
         column={1}
       >
         <Descriptions.Item label="Количество грамматических ошибок в тексте">
-          {data?.grammatic_errors_count}
+          {data?.grammatical_errors_count}
         </Descriptions.Item>
-        <Descriptions.Item label="Индекс «заспамленности»">{data?.spam_index}</Descriptions.Item>
+        <Descriptions.Item label="Индекс «заспамленности»">{data?.spam}</Descriptions.Item>
 
-        <Descriptions.Item label="Индекс «воды»">{data?.water_index}</Descriptions.Item>
-        <Descriptions.Item label="Индекс кликбейтности">{data?.clickbait_index}</Descriptions.Item>
-        <Descriptions.Item label="Индекс по наличию эмоционально окрашенных слов">
-          {data?.sentiment_index}
-        </Descriptions.Item>
-        <Descriptions.Item label="Степень похожести стиля статьи на разговорный">
-          {data?.speech_index}
-        </Descriptions.Item>
-        <Descriptions.Item label="Степень похожести стиля статьи на научный">{data?.intuition_index}</Descriptions.Item>
+        <Descriptions.Item label="Индекс «воды»">{data?.water}</Descriptions.Item>
+        <Descriptions.Item label="Индекс кликбейтности">{data?.clickbait}</Descriptions.Item>
+        <Descriptions.Item label="Индекс по наличию эмоционально окрашенных слов">{data?.sentiment}</Descriptions.Item>
+        <Descriptions.Item label="Степень похожести стиля статьи на разговорный">{data?.speech}</Descriptions.Item>
+        <Descriptions.Item label="Степень похожести стиля статьи на научный">{data?.intuition}</Descriptions.Item>
         <Descriptions.Item label="Соотношение слов аппелирующих к разуму / чувствам">
-          {data?.rationality_index}
+          {data?.rationality}
         </Descriptions.Item>
       </Descriptions>
       <Divider />

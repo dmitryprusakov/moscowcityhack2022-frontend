@@ -17,6 +17,10 @@ export type AnalyzeInitialData = {
 
 export type AnalyzisData = {
   id: number;
+  date_added: string;
+  date_updated: string;
+  uid: string;
+  status: 'IN_PROGRESS' | 'FINISHED';
   primary_source_url?: string;
   created_at?: string;
   text?: string;
@@ -25,24 +29,18 @@ export type AnalyzisData = {
   percentage_blacklist?: number;
   source_text?: string;
   avg_sources_score?: number;
-  reliable_sources_flag?: boolean;
+  reliable_sources?: boolean;
   diagram_data?: string;
-  // {
-  //   date: string;
-  //   is_valid: boolean;
-  // }[];
-  plagiary_percentage?: string;
+  plagiarism?: string;
   is_any_sentiment_delta?: true;
   facts?: string;
-  grammatic_errors_count?: number;
-  spam_index?: number;
-  water_index?: number;
-  sentiment_index?: number;
-  speech_index?: number;
-  intuition_index?: number;
-  clickbait_index?: number;
-  rationality_index?: number;
-  fake_index?: number;
-  date_added: string;
-  date_updated: string;
+  grammatical_errors_count?: number;
+  spam?: number;
+  water?: number;
+  sentiment?: number;
+  speech?: number;
+  intuition?: number;
+  clickbait?: number;
+  rationality?: number;
+  fake?: number;
 };

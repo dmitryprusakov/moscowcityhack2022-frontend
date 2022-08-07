@@ -31,9 +31,7 @@ const Block2: FC<Block2Props> = ({ data }: Block2Props) => {
         <Descriptions.Item label="Средний рейтинг СМИ , разместивших перепечатку статьи">
           {data?.avg_sources_score}
         </Descriptions.Item>
-        <Descriptions.Item label="Наличие более 10 доверенных источников">
-          {data?.reliable_sources_flag}
-        </Descriptions.Item>
+        <Descriptions.Item label="Наличие более 10 доверенных источников">{data?.reliable_sources}</Descriptions.Item>
       </Descriptions>
       <Divider />
     </>

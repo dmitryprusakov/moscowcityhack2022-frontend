@@ -13,8 +13,6 @@ const axiosInstance = axios.create({
   baseURL: 'http://82.146.37.120:7878',
 });
 
-let count = 0;
-
 function* analyzerSaga(): SagaIterator {
   yield all([
     takeLatest(sendDataToAnalyzis, function* sendDataToAnalyzisSaga({ payload }) {
@@ -40,22 +38,16 @@ function* analyzerSaga(): SagaIterator {
     }),
     takeLatest(checkAnalysisData, function* checkAnalysisDataSaga({ payload }) {
       try {
-        console.log(payload);
-
         const { data }: AxiosResponse<AnalyzisData> = yield axiosInstance.get(`/api/v1/analysis_results/${payload}`);
 
         console.log('checkAnalysisData', data);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        if (count < 20) {
-          yield delay(10000);
-
-          yield put(setAnalysisData(success(data)));
-          yield put(checkAnalysisData(payload));
-          count++;
-        }
 
         yield put(setAnalysisData(success(data)));
-        count = 0;
+
+        if (data.status === 'IN_PROGRESS') {
+          yield delay(10000);
+          yield put(checkAnalysisData(payload));
+        }
       } catch (error) {
         const { response, config } = error as AxiosError;
         console.log({ status: response?.status, requestUrl: config?.url || '' });

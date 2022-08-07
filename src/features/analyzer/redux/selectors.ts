@@ -1,4 +1,4 @@
-import { AnalyzeInitialData, AnalyzisData, Block1, Block2 } from 'types';
+import { AnalyzeInitialData, AnalyzisData } from 'types';
 import { RemoteData } from 'libs/remote';
 import { RootState } from 'store';
 
@@ -6,8 +6,4 @@ const selectInitialData = (state: RootState): RemoteData<AnalyzeInitialData> => 
 
 const selectAnalyzisData = (state: RootState): RemoteData<AnalyzisData> => state.analyzer.analyzisData;
 
-const selectAnalyzisDataBlock1 = (state: RootState): RemoteData<Block1> => state.analyzer.analyzisDataBlock1;
-
-const selectAnalyzisDataBlock2 = (state: RootState): RemoteData<Block2> => state.analyzer.analyzisDataBlock2;
-
-export { selectInitialData, selectAnalyzisData, selectAnalyzisDataBlock1, selectAnalyzisDataBlock2 };
+export { selectInitialData, selectAnalyzisData };
