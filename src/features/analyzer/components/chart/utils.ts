@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 import * as am5 from '@amcharts/amcharts5';
@@ -75,11 +76,17 @@ const makeSeries = ({ chart, xAxis, yAxis, legend, color, name, fieldName, data 
   legend.data.push(series);
 };
 
-export const createChart = (id: string, data: AnalyzisData) => {
-  const chartData = data.diagram_data;
+type Point = {
+  date: string;
+  is_valid: boolean;
+};
+
+export const createChart = (root: am5.Root, data: AnalyzisData) => {
+  if (!data.diagram_data) return;
+  const chartData = JSON.parse(data.diagram_data);
   console.log('chartData', chartData);
 
-  const numberedData = chartData!.map((point) => ({
+  const numberedData = chartData.map((point: Point) => ({
     is_valid: point.is_valid,
     date: new Date(point.date).getTime(),
   }));
@@ -87,7 +94,7 @@ export const createChart = (id: string, data: AnalyzisData) => {
   const sortedByDateData = numberedData.sort((a, b) => a.date - b.date);
 
   const calculatedData = sortedByDateData
-    .reduce((acc: any[], value) => {
+    .reduce((acc: any[], value: Point) => {
       const weekOfPoint = moment(value.date).isoWeeks();
 
       if (value.is_valid) {
@@ -112,7 +119,7 @@ export const createChart = (id: string, data: AnalyzisData) => {
 
   console.log('calculatedData', calculatedData);
 
-  const root = am5.Root.new(id);
+  // const root = am5.Root.new(id);
 
   const chart = root.container.children.push(
     am5xy.XYChart.new(root, {

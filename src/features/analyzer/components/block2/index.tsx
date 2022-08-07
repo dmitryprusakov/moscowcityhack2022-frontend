@@ -22,17 +22,17 @@ const Block2: FC<Block2Props> = ({ data }: Block2Props) => {
         column={1}
       >
         <Descriptions.Item label="Количество СМИ, разместивших статью или её видоизменённые копии">
-          {data.avg_sources_score}
+          {data.times_published}
         </Descriptions.Item>
         <Descriptions.Item label="% СМИ из списка, заблокированных Роскомнадзором">
-          {data?.percentage_blacklist || 'н/д'}
+          {data?.percentage_blacklist}
         </Descriptions.Item>
 
         <Descriptions.Item label="Средний рейтинг СМИ , разместивших перепечатку статьи">
-          {data?.avg_sources_score || 'н/д'}
+          {data?.avg_sources_score}
         </Descriptions.Item>
         <Descriptions.Item label="Наличие более 10 доверенных источников">
-          {data?.reliable_sources_flag || 'н/д'}
+          {data?.reliable_sources_flag}
         </Descriptions.Item>
       </Descriptions>
       <Divider />

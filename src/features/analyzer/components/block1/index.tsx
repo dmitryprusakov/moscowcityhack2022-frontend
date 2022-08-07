@@ -11,6 +11,8 @@ interface Block1Props {
 }
 
 const Block1: FC<Block1Props> = ({ data }: Block1Props) => {
+  console.log(data);
+
   return (
     <>
       <Descriptions
@@ -23,16 +25,15 @@ const Block1: FC<Block1Props> = ({ data }: Block1Props) => {
         }
         column={1}
       >
-        <Descriptions.Item label="Ссылка на источник">{data.primary_source_url}</Descriptions.Item>
-        <Descriptions.Item label="Рейтинг достоверности первоисточника">
-          {data?.source_score || 'н/д'}
-        </Descriptions.Item>
-        <Descriptions.Item label="Дата публикации">{data?.created_at || 'н/д'}</Descriptions.Item>
+        <Descriptions.Item label="Индекс достоверности">{data?.fake_index}</Descriptions.Item>
+        <Descriptions.Item label="Ссылка на источник">{data?.primary_source_url}</Descriptions.Item>
+        <Descriptions.Item label="Рейтинг достоверности первоисточника">{data?.source_score}</Descriptions.Item>
+        <Descriptions.Item label="Дата публикации">{data?.created_at}</Descriptions.Item>
         <Descriptions.Item label="Текст источника">
           <></>
         </Descriptions.Item>
       </Descriptions>
-      <span className={css.textDescriptionContent}>{data?.text || 'н/д'}</span>
+      <span className={css.textDescriptionContent}>{data?.text}</span>
       <Divider />
     </>
   );

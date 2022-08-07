@@ -23,17 +23,20 @@ const Block2: FC<Block2Props> = ({ data }: Block2Props) => {
         }
         column={1}
       >
-        <Descriptions.Item label="% статьи, заимствованной из первоисточника">
-          {data.plagiary_percentage}
+        <Descriptions.Item label="% уникальности относительно первоисточника">
+          {data?.plagiary_percentage}
         </Descriptions.Item>
+
         <Descriptions.Item label="Степень эмоциональности отличается от оригинала">
-          {data?.is_any_sentiment_delta || 'н/д'}
+          {data?.is_any_sentiment_delta}
         </Descriptions.Item>
         <Descriptions.Item label="Сопоставление фактов">
           <></>
         </Descriptions.Item>
       </Descriptions>
-      <span className={css.textDescriptionContent}>{data?.facts || 'н/д'}</span>
+      <span className={css.textDescriptionContent} style={{ whiteSpace: 'pre-line' }}>
+        {data?.facts}
+      </span>
       <Divider />
     </>
   );

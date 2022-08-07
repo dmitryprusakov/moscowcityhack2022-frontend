@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SagaIterator } from 'redux-saga';
 import { all, delay, put, takeLatest } from 'redux-saga/effects';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import { AnalyzeInitialData, AnalyzisData } from 'types';
-import { failure, pending, success } from 'libs/remote';
+import { pending, success } from 'libs/remote';
 
 import { checkAnalysisData, sendDataToAnalyzis, setAnalysisData, setInitialData } from './slice';
-import { testData, testText } from './fake-data';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://84.252.137.43:8000',
+  baseURL: 'http://82.146.37.120:7878',
 });
+
+let count = 0;
 
 function* analyzerSaga(): SagaIterator {
   yield all([
@@ -22,43 +24,46 @@ function* analyzerSaga(): SagaIterator {
         yield put(setInitialData(pending()));
         yield delay(1000);
 
-        // const { data }: AxiosResponse<AnalyzeInitialData> = yield axiosInstance.post('/api/docs/', payload);
+        const { data }: AxiosResponse<AnalyzeInitialData> = yield axiosInstance.post('/api/docs/', payload);
 
-        // console.log('data', data);
+        console.log('data', data);
 
-        yield put(setInitialData(success({ text: testText, title: 'kek', ar_id: '1' })));
+        yield put(setInitialData(success({ text: data.text, title: data.title, ar_id: data.ar_id })));
 
-        // const { ar_id: arId } = data;
-
-        yield put(checkAnalysisData('1'));
+        yield put(checkAnalysisData(data.ar_id));
       } catch (error) {
         const { response, config } = error as AxiosError;
+        console.log({ status: response?.status, requestUrl: config?.url || '' });
 
-        yield put(setInitialData(failure({ status: response?.status, requestUrl: config?.url || '' })));
+        // yield put(setInitialData(failure({ status: response?.status, requestUrl: config?.url || '' })));
       }
     }),
     takeLatest(checkAnalysisData, function* checkAnalysisDataSaga({ payload }) {
       try {
-        yield put(setAnalysisData(pending()));
+        console.log(count);
 
-        console.log('checkAnalysisData');
+        const { data }: AxiosResponse<AnalyzisData> = yield axiosInstance.get(`/api/analysis-results/${payload}`);
 
-        // const { data }: AxiosResponse<AnalyzisData> = yield axiosInstance.get(`/api/analysis-results/${payload}`);
-
+        console.log('checkAnalysisData', data);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        if (Object.values(testData).some((val) => !val)) {
-          yield delay(1000);
+        if (count < 20) {
+          yield delay(10000);
 
+          yield put(setAnalysisData(success(data)));
           yield put(checkAnalysisData(payload));
+          count++;
         }
-        // } else {
-        //   console.log('finish', testData);
 
-        yield put(setAnalysisData(success(testData)));
-        // }
+        yield put(setAnalysisData(success(data)));
+        count = 0;
       } catch (error) {
         const { response, config } = error as AxiosError;
-        yield put(setAnalysisData(failure({ status: response?.status, requestUrl: config?.url || '' })));
+        console.log({ status: response?.status, requestUrl: config?.url || '' });
+
+        yield delay(10000);
+        yield put(checkAnalysisData(payload));
+
+        // yield put(setAnalysisData(failure({ status: response?.status, requestUrl: config?.url || '' })));
       }
     }),
   ]);

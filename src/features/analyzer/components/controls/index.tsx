@@ -1,22 +1,38 @@
 import { Button, Form, Input, Tabs } from 'antd';
 import { ExceptionOutlined, LinkOutlined } from '@ant-design/icons';
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
+
+import { useLocation } from 'react-router-dom';
 
 import { FormFields } from 'types';
 import { useAppDispatch } from 'store';
 
-import { checkAnalysisData, sendDataToAnalyzis } from '../../redux/slice';
+import { sendDataToAnalyzis } from '../../redux/slice';
 
 import css from './index.module.css';
 
 const { TabPane } = Tabs;
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 const Controls: FC = () => {
+  const query = useQuery();
+  const urlParam = query.get('url');
   const dispatch = useAppDispatch();
 
-  const [activeTabKey, setActiveTabKey] = useState<string>('analyze-form-text');
+  const [activeTabKey, setActiveTabKey] = useState<string>('analyze-form-url');
 
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (form && urlParam) {
+      form.setFieldsValue({ url: urlParam });
+    }
+  }, [form, urlParam]);
 
   const handleChangeTab = (tabKey: string) => {
     setActiveTabKey(tabKey);
@@ -77,7 +93,7 @@ const Controls: FC = () => {
             <Input size="large" placeholder="Заголовок новости" />
           </Form.Item>
           <Form.Item name="text" rules={[{ required: true, message: 'Ввудите текст новости!' }]}>
-            <Input.TextArea size="large" showCount placeholder="Текст новости" />
+            <Input.TextArea size="large" showCount placeholder="Текст новости" style={{ minHeight: '250px' }} />
           </Form.Item>
         </Form>
       </TabPane>

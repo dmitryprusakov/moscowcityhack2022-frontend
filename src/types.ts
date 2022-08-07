@@ -26,10 +26,11 @@ export type AnalyzisData = {
   source_text?: string;
   avg_sources_score?: number;
   reliable_sources_flag?: boolean;
-  diagram_data?: {
-    date: string;
-    is_valid: boolean;
-  }[];
+  diagram_data?: string;
+  // {
+  //   date: string;
+  //   is_valid: boolean;
+  // }[];
   plagiary_percentage?: string;
   is_any_sentiment_delta?: true;
   facts?: string;

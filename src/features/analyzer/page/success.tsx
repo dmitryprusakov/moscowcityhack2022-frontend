@@ -23,14 +23,14 @@ const AnalyzisSuccess: FC<AnalyzisSuccessProps> = ({ data }: AnalyzisSuccessProp
         column={1}
       >
         <Descriptions.Item label="Процесс анализа">
-          <Badge status="success" text="Завершен" />
+          <Badge status="processing" text="В обработке" />
         </Descriptions.Item>
-        <Descriptions.Item label="Заголовок новости">{data?.title || 'н/д'}</Descriptions.Item>
+        <Descriptions.Item label="Заголовок новости">{data?.title}</Descriptions.Item>
         <Descriptions.Item label="Текст новости">
           <></>
         </Descriptions.Item>
       </Descriptions>
-      <span className={css.textDescriptionContent}>{data?.text || 'н/д'}</span>
+      <span className={css.textDescriptionContent}>{data?.text}</span>
       <Divider />
     </>
   );
