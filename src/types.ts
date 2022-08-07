@@ -10,7 +10,7 @@ export type FormFields = {
 };
 
 export type AnalyzeInitialData = {
-  ar_id: string;
+  arid: string;
   text?: string;
   title?: string;
 };

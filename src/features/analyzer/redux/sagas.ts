@@ -28,9 +28,9 @@ function* analyzerSaga(): SagaIterator {
 
         console.log('data', data);
 
-        yield put(setInitialData(success({ text: data.text, title: data.title, ar_id: data.ar_id })));
+        yield put(setInitialData(success({ text: data.text, title: data.title, arid: data.arid })));
 
-        yield put(checkAnalysisData(data.ar_id));
+        yield put(checkAnalysisData(data.arid));
       } catch (error) {
         const { response, config } = error as AxiosError;
         console.log({ status: response?.status, requestUrl: config?.url || '' });
@@ -40,7 +40,7 @@ function* analyzerSaga(): SagaIterator {
     }),
     takeLatest(checkAnalysisData, function* checkAnalysisDataSaga({ payload }) {
       try {
-        console.log(count);
+        console.log(payload);
 
         const { data }: AxiosResponse<AnalyzisData> = yield axiosInstance.get(`/api/v1/analysis_results/${payload}`);
 
