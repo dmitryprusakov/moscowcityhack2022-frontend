@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "webpack-cli serve",
-    "build": "yarn clean && webpack --mode=production",
+    "build": "rimraf dist && webpack --mode=production",
     "build-prod": "webpack --mode=production",
     "analyze": "yarn webpack --analyze",
     "clean": "rimraf dist",
