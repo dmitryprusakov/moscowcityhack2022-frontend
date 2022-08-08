@@ -12,6 +12,8 @@
 }
 
 
-
+.badge :global(.ant-badge-status-text) {
+    color: transparent;
+}
 
  

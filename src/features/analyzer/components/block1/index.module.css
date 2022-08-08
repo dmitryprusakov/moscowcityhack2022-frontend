@@ -11,6 +11,9 @@
     border-radius: 4px;
 }
 
+.badge :global(.ant-badge-status-text) {
+    color: transparent;
+}
 
 
 

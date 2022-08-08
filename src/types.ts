@@ -9,6 +9,8 @@ export type FormFields = {
   title?: string;
 };
 
+export type AnalyzeStatus = 'processing' | 'success' | null;
+
 export type AnalyzeInitialData = {
   arid: string;
   text?: string;
@@ -20,14 +22,14 @@ export type AnalyzisData = {
   date_added: string;
   date_updated: string;
   uid: string;
-  status: 'IN_PROGRESS' | 'FINISHED';
+  status: 'IN_PROGRESS' | 'DONE';
   primary_source_url?: string;
   created_at?: string;
-  text?: string;
+  source_text?: string;
+  source_title?: string;
   source_score?: number;
   times_published?: number;
   percentage_blacklist?: number;
-  source_text?: string;
   avg_sources_score?: number;
   reliable_sources?: boolean;
   diagram_data?: string;

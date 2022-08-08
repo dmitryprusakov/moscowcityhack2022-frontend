@@ -1,15 +1,20 @@
-import { Badge, Descriptions, Divider } from 'antd';
-import { FileTextTwoTone } from '@ant-design/icons';
+import { CheckCircleOutlined, FileTextTwoTone, SyncOutlined } from '@ant-design/icons';
+import { Descriptions, Divider, Tag } from 'antd';
 import React, { FC, memo } from 'react';
 
 import { AnalyzeInitialData } from 'types';
+import { useAppSelector } from 'store';
 
-import css from './index.module.css';
+import { selectAnalyzeStatus } from '../redux/selectors';
+
+// import css from './index.module.css';
 
 interface AnalyzisSuccessProps {
   data: AnalyzeInitialData;
 }
-const AnalyzisSuccess: FC<AnalyzisSuccessProps> = ({ data }: AnalyzisSuccessProps) => {
+const AnalyzisSuccess: FC<AnalyzisSuccessProps> = () => {
+  const analyzeStatus = useAppSelector(selectAnalyzeStatus);
+
   return (
     <>
       <Descriptions
@@ -23,14 +28,19 @@ const AnalyzisSuccess: FC<AnalyzisSuccessProps> = ({ data }: AnalyzisSuccessProp
         column={1}
       >
         <Descriptions.Item label="Процесс анализа">
-          <Badge status="processing" text="В обработке" />
+          <Tag
+            icon={analyzeStatus === 'processing' ? <SyncOutlined spin /> : <CheckCircleOutlined />}
+            color={analyzeStatus || 'default'}
+          >
+            {analyzeStatus === 'processing' ? 'В обработке' : 'Завершен'}
+          </Tag>
         </Descriptions.Item>
-        <Descriptions.Item label="Заголовок новости">{data?.title}</Descriptions.Item>
+        {/* <Descriptions.Item label="Заголовок новости">{data?.title}</Descriptions.Item>
         <Descriptions.Item label="Текст новости">
           <></>
-        </Descriptions.Item>
+        </Descriptions.Item> */}
       </Descriptions>
-      <span className={css.textDescriptionContent}>{data?.text}</span>
+      {/* <span className={css.textDescriptionContent}>{data?.text}</span> */}
       <Divider />
     </>
   );
