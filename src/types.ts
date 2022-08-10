@@ -17,6 +17,17 @@ export type AnalyzeInitialData = {
   title?: string;
 };
 
+export type Point = {
+  date: number;
+  is_valid: boolean;
+};
+
+export type FormattedPoint = {
+  week: number;
+  validMediaCount: number;
+  invalidMediaCount: number;
+};
+
 export type AnalyzisData = {
   id: number;
   date_added: string;
@@ -32,7 +43,7 @@ export type AnalyzisData = {
   percentage_blacklist?: number;
   avg_sources_score?: number;
   reliable_sources?: boolean;
-  diagram_data?: string;
+  diagram_data?: Point[];
   plagiarism?: string;
   is_any_sentiment_delta?: true;
   facts?: string;

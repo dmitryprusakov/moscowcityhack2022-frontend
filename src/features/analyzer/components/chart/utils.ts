@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
-import { AnalyzisData } from 'types';
+import { AnalyzisData, FormattedPoint, Point } from 'types';
 
 import moment from 'moment';
 
@@ -76,17 +76,63 @@ const makeSeries = ({ chart, xAxis, yAxis, legend, color, name, fieldName, data 
   legend.data.push(series);
 };
 
-type Point = {
-  date: string;
-  is_valid: boolean;
-};
-
 export const createChart = (root: am5.Root, data: AnalyzisData) => {
   if (!data.diagram_data) return;
-  const chartData = JSON.parse(data.diagram_data);
+  const chartData = data.diagram_data;
   console.log('chartData', chartData);
 
-  const numberedData = chartData.map((point: Point) => ({
+  // const chartData = [
+  //   {
+  //     is_valid: true,
+  //     date: '2021-07-24',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-07-24',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-12-09',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-07-28',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-07-28',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-11-15',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-08-06',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-07-28',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-07-26',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2021-07-23',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2014-10-27',
+  //   },
+  //   {
+  //     is_valid: true,
+  //     date: '2019-08-11',
+  //   },
+  // ];
+
+  const numberedData: Point[] = chartData.map((point: Point) => ({
     is_valid: point.is_valid,
     date: new Date(point.date).getTime(),
   }));
@@ -114,7 +160,7 @@ export const createChart = (root: am5.Root, data: AnalyzisData) => {
       }
 
       return acc;
-    }, [])
+    }, [] as FormattedPoint[])
     .filter(Boolean);
 
   console.log('calculatedData', calculatedData);

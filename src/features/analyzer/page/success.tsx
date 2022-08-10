@@ -27,7 +27,7 @@ const AnalyzisSuccess: FC<AnalyzisSuccessProps> = () => {
         }
         column={1}
       >
-        <Descriptions.Item label="Процесс анализа">
+        <Descriptions.Item label="Процесс анализа (~2мин)">
           <Tag
             icon={analyzeStatus === 'processing' ? <SyncOutlined spin /> : <CheckCircleOutlined />}
             color={analyzeStatus || 'default'}

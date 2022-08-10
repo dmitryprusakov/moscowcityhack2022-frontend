@@ -29,7 +29,7 @@ const Block4: FC<Block4Props> = ({ data }: Block4Props) => {
         }
         column={1}
       >
-        <Descriptions.Item label="Количество грамматических ошибок в тексте">
+        <Descriptions.Item label="Грамматические ошибки в тексте">
           {data?.grammatical_errors_count || !isLoading ? (
             data?.grammatical_errors_count
           ) : (
@@ -53,7 +53,7 @@ const Block4: FC<Block4Props> = ({ data }: Block4Props) => {
           )}
         </Descriptions.Item>
 
-        <Descriptions.Item label="Индекс по наличию эмоционально окрашенных слов">
+        <Descriptions.Item label="Индекс эмоционально окрашенных слов">
           {data?.sentiment || !isLoading ? (
             data?.sentiment
           ) : (
@@ -61,11 +61,11 @@ const Block4: FC<Block4Props> = ({ data }: Block4Props) => {
           )}
         </Descriptions.Item>
 
-        <Descriptions.Item label="Степень похожести стиля статьи на разговорный">
+        <Descriptions.Item label="Индекс разговорного стиля">
           {data?.speech || !isLoading ? data?.speech : <Badge className={css.badge} text="." status="processing" />}
         </Descriptions.Item>
 
-        <Descriptions.Item label="Степень похожести стиля статьи на научный">
+        <Descriptions.Item label="Индекс научного стиля">
           {data?.intuition || !isLoading ? (
             data?.intuition
           ) : (
@@ -73,7 +73,7 @@ const Block4: FC<Block4Props> = ({ data }: Block4Props) => {
           )}
         </Descriptions.Item>
 
-        <Descriptions.Item label="Соотношение слов аппелирующих к разуму / чувствам">
+        <Descriptions.Item label="Соотношение слов к разуму / чувствам">
           {data?.rationality || !isLoading ? (
             data?.rationality
           ) : (

@@ -28,9 +28,9 @@ const Block2: FC<Block2Props> = ({ data }: Block2Props) => {
         }
         column={1}
       >
-        <Descriptions.Item label="Количество СМИ, разместивших статью или её видоизменённые копии">
+        {/* <Descriptions.Item label="Количество СМИ, разместивших статью или её видоизменённые копии">
           {data.times_published}
-        </Descriptions.Item>
+        </Descriptions.Item> */}
         <Descriptions.Item label="% СМИ из списка, заблокированных Роскомнадзором">
           {data?.percentage_blacklist || !isLoading ? (
             data?.percentage_blacklist
@@ -46,7 +46,9 @@ const Block2: FC<Block2Props> = ({ data }: Block2Props) => {
             <Badge className={css.badge} text="." status="processing" />
           )}
         </Descriptions.Item>
-        <Descriptions.Item label="Наличие более 10 доверенных источников">{data?.reliable_sources}</Descriptions.Item>
+        {/* <Descriptions.Item label="Наличие более 10 доверенных источников">
+        {data?.reliable_sources}
+        </Descriptions.Item> */}
       </Descriptions>
       <Divider />
     </>
